@@ -1,6 +1,7 @@
 # WPFGenericHost
 
 在WPF应用中引入Microsoft.Extensions.Hosting，以便具备依赖注入、日志、配置等功能
+
 参考：https://laurentkempe.com/2019/09/03/WPF-and-dotnet-Generic-Host-with-dotnet-Core-3-0/
 
 # 问题：
