@@ -8,13 +8,24 @@ using WPFGenericHost.Services;
 
 namespace WPFGenericHost.ViewModels
 {
-    [ObservableObject]
-    public partial class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
         private readonly ITextService _textService;
 
         [ObservableProperty]
         private string? helloText;
+        /// <summary>
+        /// 无参构造函数，为XAML设计器提供设计时支持
+        /// </summary>
+        public MainViewModel()
+        {
+            _textService = new TextServiceForDesigner();
+            HelloText = _textService.GetText();
+        }
+        /// <summary>
+        /// 用于依赖注入的构造函数
+        /// </summary>
+        /// <param name="textService">用于依赖注入</param>
         public MainViewModel(ITextService textService)
         {
             _textService = textService;

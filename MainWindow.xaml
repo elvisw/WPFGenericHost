@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFGenericHost"
-        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:WPFGenericHost.ViewModels"
+        mc:Ignorable="d"        
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
         Title="MainWindow" Height="150" Width="600">
+    <!--d:DataContext: 使用设计时属性绑定MainViewModel，调用默认构造函数，提供设计时支持。-->
     <Grid>
-        <TextBlock FontSize="45" Text="{Binding HelloText}"></TextBlock>
+        <TextBlock FontSize="45" Text="{Binding HelloText}"/>
     </Grid>
 </Window>
