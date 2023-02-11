@@ -1,10 +1,10 @@
 # WPFGenericHost
 
-ÔÚWPFÓ¦ÓÃÖĞÒıÈëMicrosoft.Extensions.Hosting£¬ÒÔ±ã¾ß±¸ÒÀÀµ×¢Èë¡¢ÈÕÖ¾¡¢ÅäÖÃµÈ¹¦ÄÜ
+åœ¨WPFåº”ç”¨ä¸­å¼•å…¥Microsoft.Extensions.Hostingï¼Œä»¥ä¾¿å…·å¤‡ä¾èµ–æ³¨å…¥ã€æ—¥å¿—ã€é…ç½®ç­‰åŠŸèƒ½
 
-²Î¿¼£ºhttps://laurentkempe.com/2019/09/03/WPF-and-dotnet-Generic-Host-with-dotnet-Core-3-0/
+å‚è€ƒï¼šhttps://laurentkempe.com/2019/09/03/WPF-and-dotnet-Generic-Host-with-dotnet-Core-3-0/
 
-ÒÀÀµ`CommunityToolkit.Mvvm`ºÍ`Microsoft.Extensions.Hosting`ÕâÁ½¸önuget°ü¡£
+ä¾èµ–`CommunityToolkit.Mvvm`å’Œ`Microsoft.Extensions.Hosting`è¿™ä¸¤ä¸ªnugetåŒ…ã€‚
 
 ## App.xaml
 
@@ -64,11 +64,11 @@ public partial class App : Application
     }
 ```
 
-# ÎÊÌâ£º
-1. ~~ÊÓÍ¼Ä£ĞÍÊ¹ÓÃÁËÒÀÀµ×¢Èëºó£¬¹¹Ôìº¯ÊıÀï´øÓĞ²ÎÊı£¬ÎŞ·¨ÔÚxamlÖĞ°ó¶¨`DataContext`£¬Ö»ÄÜÔÚÒş²Ø´úÂëÀï´¦Àí£¬Õâ¾Íµ¼ÖÂÁËÎŞ·¨Ê¹ÓÃVisual StudioµÄxamlÉè¼ÆÊÓÍ¼À´´¦Àí°ó¶¨£¬Ö»ÄÜÊÖ¹¤±àĞ´xaml´úÂë£¬²¢ÇÒxamlÉè¼ÆÊÓÍ¼ÎŞ·¨ÊµÊ±Ô¤ÀÀ°ó¶¨Êı¾İ£¬Ö»ÄÜÔËĞĞ³ÌĞòºó¿´µ½Ğ§¹û¡£ ~~
+# é—®é¢˜ï¼š
+1. ~~è§†å›¾æ¨¡å‹ä½¿ç”¨äº†ä¾èµ–æ³¨å…¥åï¼Œæ„é€ å‡½æ•°é‡Œå¸¦æœ‰å‚æ•°ï¼Œæ— æ³•åœ¨xamlä¸­ç»‘å®š`DataContext`ï¼Œåªèƒ½åœ¨éšè—ä»£ç é‡Œå¤„ç†ï¼Œè¿™å°±å¯¼è‡´äº†æ— æ³•ä½¿ç”¨Visual Studioçš„xamlè®¾è®¡è§†å›¾æ¥å¤„ç†ç»‘å®šï¼Œåªèƒ½æ‰‹å·¥ç¼–å†™xamlä»£ç ï¼Œå¹¶ä¸”xamlè®¾è®¡è§†å›¾æ— æ³•å®æ—¶é¢„è§ˆç»‘å®šæ•°æ®ï¼Œåªèƒ½è¿è¡Œç¨‹åºåçœ‹åˆ°æ•ˆæœã€‚~~
 
-½â¾ö£º
-1. ÎªÊÓÍ¼Ä£ĞÍÀàĞÍ´´½¨Á½¸ö¹¹Ôìº¯Êı£¬ÎŞ²Î¹¹Ôìº¯ÊıÓÃÓÚÉè¼ÆÊ±Êı¾İ£¬ÁíÒ»¸öÓÃÓÚÒÀÀµ×¢Èë¡£
+è§£å†³ï¼š
+1. ä¸ºè§†å›¾æ¨¡å‹ç±»å‹åˆ›å»ºä¸¤ä¸ªæ„é€ å‡½æ•°ï¼Œæ— å‚æ„é€ å‡½æ•°ç”¨äºè®¾è®¡æ—¶æ•°æ®ï¼Œå¦ä¸€ä¸ªç”¨äºä¾èµ–æ³¨å…¥ã€‚
 
 ```csharp
 public partial class MainViewModel : ObservableObject
@@ -78,7 +78,7 @@ public partial class MainViewModel : ObservableObject
         [ObservableProperty]
         private string? helloText;
         /// <summary>
-        /// ÎŞ²Î¹¹Ôìº¯Êı£¬ÎªXAMLÉè¼ÆÆ÷Ìá¹©Éè¼ÆÊ±Ö§³Ö
+        /// æ— å‚æ„é€ å‡½æ•°ï¼Œä¸ºXAMLè®¾è®¡å™¨æä¾›è®¾è®¡æ—¶æ”¯æŒ
         /// </summary>
         public MainViewModel()
         {
@@ -86,9 +86,9 @@ public partial class MainViewModel : ObservableObject
             HelloText = _textService.GetText();
         }
         /// <summary>
-        /// ÓÃÓÚÒÀÀµ×¢ÈëµÄ¹¹Ôìº¯Êı
+        /// ç”¨äºä¾èµ–æ³¨å…¥çš„æ„é€ å‡½æ•°
         /// </summary>
-        /// <param name="textService">ÓÃÓÚÒÀÀµ×¢Èë</param>
+        /// <param name="textService">ç”¨äºä¾èµ–æ³¨å…¥</param>
         public MainViewModel(ITextService textService)
         {
             _textService = textService;
@@ -97,7 +97,7 @@ public partial class MainViewModel : ObservableObject
     }
 ```
 
-2. Ê¹ÓÃ [Éè¼ÆÊ±ÊôĞÔ](http://msdn.microsoft.com/en-us/library/ff602277(v=vs.95).aspx) £¬½«ÊÓÍ¼Ä£ĞÍÔÚÉè¼ÆÆ÷ÖĞ°ó¶¨£¬ÔÚXAMLÖĞ£¬Ìí¼ÓÒÔÏÂÊôĞÔµ½`<Window>`»ò`<UserControl>`£º
+2. ä½¿ç”¨ [è®¾è®¡æ—¶å±æ€§](http://msdn.microsoft.com/en-us/library/ff602277(v=vs.95).aspx) ï¼Œå°†è§†å›¾æ¨¡å‹åœ¨è®¾è®¡å™¨ä¸­ç»‘å®šï¼Œåœ¨XAMLä¸­ï¼Œæ·»åŠ ä»¥ä¸‹å±æ€§åˆ°`<Window>`æˆ–`<UserControl>`ï¼š
 
 ```
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -106,7 +106,7 @@ mc:Ignorable="d"
 d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
 ```
 
-ÔËĞĞÊ±µÄ`DataContext`£¬ÒÀÈ»ĞèÒªÔÚÒş²Ø´úÂëÀï´¦ÀíÒÀÀµ×¢Èë£º
+è¿è¡Œæ—¶çš„`DataContext`ï¼Œä¾ç„¶éœ€è¦åœ¨éšè—ä»£ç é‡Œå¤„ç†ä¾èµ–æ³¨å…¥ï¼š
 
 ```csharp
 public MainWindow(MainViewModel mvm)
@@ -117,4 +117,4 @@ public MainWindow(MainViewModel mvm)
 ```
 
 
-²Î¿¼£ºhttps://stackoverflow.com/questions/25366291/how-to-handle-dependency-injection-in-a-wpf-mvvm-application/25508012#25508012
+å‚è€ƒï¼šhttps://stackoverflow.com/questions/25366291/how-to-handle-dependency-injection-in-a-wpf-mvvm-application/25508012#25508012
