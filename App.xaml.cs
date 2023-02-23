@@ -32,15 +32,29 @@ namespace WPFGenericHost
                 {
                     services.Configure<Settings>(context.Configuration);
                     services.AddSingleton<ITextService, TextService>();
-                    services.AddSingleton<MainViewModel>();
-                    services.AddSingleton<MainWindow>();
+                    //是AddTransient还是AddSingleton，需要进一步研究
+                    services.AddTransient<MainViewModel>();
+                    services.AddTransient<MainWindow>();
                 })
                 .ConfigureLogging(logging =>
                 {
                     logging.AddDebug();
                 })
                 .Build();
+
+            Services = _host.Services;
+
         }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
