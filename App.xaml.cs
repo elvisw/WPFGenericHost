@@ -32,9 +32,9 @@ namespace WPFGenericHost
                 {
                     services.Configure<Settings>(context.Configuration);
                     services.AddSingleton<ITextService, TextService>();
-                    //是AddTransient还是AddSingleton，需要进一步研究
-                    services.AddTransient<MainViewModel>();
-                    services.AddTransient<MainWindow>();
+                    //是AddTransient还是AddScoped，需要进一步研究
+                    services.AddScoped<MainViewModel>();
+                    services.AddScoped<MainWindow>();
                 })
                 .ConfigureLogging(logging =>
                 {
