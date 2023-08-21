@@ -67,11 +67,15 @@ public partial class App : Application
 ```
 
 # 问题：
-1. ~~视图模型使用了依赖注入后，构造函数里带有参数，无法在xaml中绑定`DataContext`，只能在隐藏代码里处理，这就导致了无法使用Visual Studio的xaml设计视图来处理绑定，只能手工编写xaml代码，并且xaml设计视图无法实时预览绑定数据，只能运行程序后看到效果。~~
+
+## 问题1
+
+~~视图模型使用了依赖注入后，构造函数里带有参数，无法在xaml中绑定`DataContext`，只能在隐藏代码里处理，这就导致了无法使用Visual Studio的xaml设计视图来处理绑定，只能手工编写xaml代码，并且xaml设计视图无法实时预览绑定数据，只能运行程序后看到效果。~~
 
 # 解决：
-1. 问题1
-   1. 为视图模型类型创建两个构造函数，无参构造函数用于设计时数据，另一个用于依赖注入。
+
+## 问题1
+1. 为视图模型类型创建两个构造函数，无参构造函数用于设计时数据，另一个用于依赖注入。
 
 ```csharp
 public partial class MainViewModel : ObservableObject
@@ -100,7 +104,7 @@ public partial class MainViewModel : ObservableObject
     }
 ```
 
-   2. 使用 [设计时属性](https://learn.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ff602277(v=vs.95)) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
+2. 使用 [设计时属性](https://learn.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ff602277(v=vs.95)) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
 
 ```
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
