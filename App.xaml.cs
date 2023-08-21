@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,11 @@ namespace WPFGenericHost
         private readonly IHost _host;
         public App()
         {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory()) //From NuGet Package Microsoft.Extensions.Configuration.Json
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
             _host = new HostBuilder()
                 .ConfigureAppConfiguration((context, configurationBuilder) =>
                 {
@@ -33,13 +39,15 @@ namespace WPFGenericHost
                     //对于桌面应用，AddScoped似乎和AddSingleton区别不大，建议用AddSingleton。
                     //AddSingleton用于长期驻留内存的服务或窗口；AddTransient用于临时的窗口和服务。
                     services.Configure<Settings>(context.Configuration);
-                    services.AddSingleton<ITextService, TextService>();                    
+                    services.AddSingleton<ITextService, TextService>();
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
                 })
                 .ConfigureLogging(logging =>
                 {
-                    logging.AddDebug();
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Trace);
+                    logging.AddNLog(config);
                 })
                 .Build();
 
