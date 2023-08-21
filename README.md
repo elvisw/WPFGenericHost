@@ -44,6 +44,7 @@ public partial class App : Application
                 })
                 .ConfigureLogging(logging =>
                 {
+                    //可以修改成自己需要的日志服务
                     logging.AddDebug();
                 })
                 .Build();
