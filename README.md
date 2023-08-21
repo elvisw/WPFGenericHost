@@ -69,8 +69,9 @@ public partial class App : Application
 # 问题：
 1. ~~视图模型使用了依赖注入后，构造函数里带有参数，无法在xaml中绑定`DataContext`，只能在隐藏代码里处理，这就导致了无法使用Visual Studio的xaml设计视图来处理绑定，只能手工编写xaml代码，并且xaml设计视图无法实时预览绑定数据，只能运行程序后看到效果。~~
 
-解决：
-1. 为视图模型类型创建两个构造函数，无参构造函数用于设计时数据，另一个用于依赖注入。
+# 解决：
+1. 问题1
+   1. 为视图模型类型创建两个构造函数，无参构造函数用于设计时数据，另一个用于依赖注入。
 
 ```csharp
 public partial class MainViewModel : ObservableObject
@@ -99,7 +100,7 @@ public partial class MainViewModel : ObservableObject
     }
 ```
 
-2. 使用 [设计时属性](https://learn.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ff602277(v=vs.95)) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
+   2. 使用 [设计时属性](https://learn.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ff602277(v=vs.95)) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
 
 ```
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -108,7 +109,7 @@ mc:Ignorable="d"
 d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
 ```
 
-运行时的`DataContext`，依然需要在隐藏代码里处理依赖注入：
+为设计时编写的无参构造函数提供的服务不适合运行时的业务，好在设计时属性的绑定在运行时不起作用。因此我们可以将运行时的`DataContext`通过隐藏代码和注入的ViewModel绑定，此时的ViewModel已经通过含参构造函数被容器注入了运行时需要的依赖项，可以正常处理业务：
 
 ```csharp
 public MainWindow(MainViewModel mvm)
