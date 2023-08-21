@@ -30,11 +30,12 @@ namespace WPFGenericHost
                 })
                 .ConfigureServices((context, services) =>
                 {
+                    //对于桌面应用，AddScoped似乎和AddSingleton区别不大，建议用AddSingleton。
+                    //AddSingleton用于长期驻留内存的服务或窗口；AddTransient用于临时的窗口和服务。
                     services.Configure<Settings>(context.Configuration);
-                    services.AddSingleton<ITextService, TextService>();
-                    //是AddTransient还是AddScoped，需要进一步研究
-                    services.AddScoped<MainViewModel>();
-                    services.AddScoped<MainWindow>();
+                    services.AddSingleton<ITextService, TextService>();                    
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<MainWindow>();
                 })
                 .ConfigureLogging(logging =>
                 {
@@ -60,7 +61,7 @@ namespace WPFGenericHost
         {
             await _host.StartAsync();
             var mainWindow = _host.Services.GetService<MainWindow>();
-            mainWindow.Show();
+            mainWindow?.Show();
         }
 
         private async void Application_Exit(object sender, ExitEventArgs e)

@@ -35,8 +35,10 @@ public partial class App : Application
                 })
                 .ConfigureServices((context, services) =>
                 {
+                    //对于桌面应用，AddScoped似乎和AddSingleton区别不大，建议用AddSingleton。
+                    //AddSingleton用于长期驻留内存的服务或窗口；AddTransient用于临时的窗口和服务。
                     services.Configure<Settings>(context.Configuration);
-                    services.AddSingleton<ITextService, TextService>();
+                    services.AddSingleton<ITextService, TextService>();                    
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
                 })
@@ -97,7 +99,7 @@ public partial class MainViewModel : ObservableObject
     }
 ```
 
-2. 使用 [设计时属性](http://msdn.microsoft.com/en-us/library/ff602277(v=vs.95).aspx) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
+2. 使用 [设计时属性](https://learn.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ff602277(v=vs.95)) ，将视图模型在设计器中绑定，在XAML中，添加以下属性到`<Window>`或`<UserControl>`：
 
 ```
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
