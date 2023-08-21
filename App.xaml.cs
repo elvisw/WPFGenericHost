@@ -23,11 +23,6 @@ namespace WPFGenericHost
         private readonly IHost _host;
         public App()
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(System.IO.Directory.GetCurrentDirectory()) //From NuGet Package Microsoft.Extensions.Configuration.Json
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
             _host = new HostBuilder()
                 .ConfigureAppConfiguration((context, configurationBuilder) =>
                 {
@@ -47,7 +42,7 @@ namespace WPFGenericHost
                 {
                     logging.ClearProviders();
                     logging.SetMinimumLevel(LogLevel.Trace);
-                    logging.AddNLog(config);
+                    logging.AddNLog();
                 })
                 .Build();
 
