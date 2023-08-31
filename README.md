@@ -22,7 +22,7 @@
 ## App.xaml.cs
 
 ```csharp
-public partial class App : Application
+    public partial class App : Application
     {
         private readonly IHost _host;
         public App()
@@ -38,7 +38,7 @@ public partial class App : Application
                     //对于桌面应用，AddScoped似乎和AddSingleton区别不大，建议用AddSingleton。
                     //AddSingleton用于长期驻留内存的服务或窗口；AddTransient用于临时的窗口和服务。
                     services.Configure<Settings>(context.Configuration);
-                    services.AddSingleton<ITextService, TextService>();                    
+                    services.AddSingleton<ITextService, TextService>();
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
                 })
@@ -48,13 +48,26 @@ public partial class App : Application
                     logging.AddDebug();
                 })
                 .Build();
+
+            Services = _host.Services;
+
         }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
 
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
             await _host.StartAsync();
             var mainWindow = _host.Services.GetService<MainWindow>();
-            mainWindow.Show();
+            mainWindow?.Show();
         }
 
         private async void Application_Exit(object sender, ExitEventArgs e)
