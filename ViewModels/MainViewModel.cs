@@ -1,35 +1,33 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFGenericHost.Services;
+using WPFGenericHost.Views;
 
 namespace WPFGenericHost.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        private readonly ITextService _textService;
-
-        [ObservableProperty]
-        private string? helloText;
-        /// <summary>
-        /// 无参构造函数，为XAML设计器提供设计时支持
-        /// </summary>
         public MainViewModel()
         {
-            _textService = new TextServiceForDesigner();
-            HelloText = _textService.GetText();
         }
-        /// <summary>
-        /// 用于依赖注入的构造函数
-        /// </summary>
-        /// <param name="textService">用于依赖注入</param>
-        public MainViewModel(ITextService textService)
+        public MainViewModel(ILogger<MainViewModel> logger)
         {
-            _textService = textService;
-            HelloText = _textService.GetText();
+            logger.LogInformation($"{typeof(MainWindow)} has been loaded.");
+        }
+
+        [RelayCommand]
+        private void OpenWindow1()
+        {
+            var window1 = App.Current.Services.GetService<Window1>();
+            window1?.Show();
         }
     }
 }

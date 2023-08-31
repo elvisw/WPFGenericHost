@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using WPFGenericHost.Services;
 using WPFGenericHost.ViewModels;
+using WPFGenericHost.Views;
 
 namespace WPFGenericHost
 {
@@ -33,10 +34,24 @@ namespace WPFGenericHost
                 {
                     //对于桌面应用，AddScoped似乎和AddSingleton区别不大，建议用AddSingleton。
                     //AddSingleton用于长期驻留内存的服务或窗口；AddTransient用于临时的窗口和服务。
+                    //需要注意的是，如果窗口有关闭后再打开的情况，建议使用AddTransient。使用AddSingleton关闭再打开会导致报错：
+                    //“关闭窗口后，无法设置可见性，也无法调用 Show、ShowDialogor 或 WindowInteropHelper.EnsureHandle。”
+                    //此时建议重写该窗口的OnClosing()方法：
+                    /*
+                     protected override void OnClosing(CancelEventArgs e)
+                        {
+                            e.Cancel = true;  // cancels the window close    
+                            this.Hide();      // Programmatically hides the window
+                        }
+                     */
+
                     services.Configure<Settings>(context.Configuration);
                     services.AddSingleton<ITextService, TextService>();
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
+                    services.AddTransient<Window1ViewModel>();
+                    services.AddTransient<Window1>();
+
                 })
                 .ConfigureLogging(logging =>
                 {

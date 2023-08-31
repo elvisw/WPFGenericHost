@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFGenericHost.ViewModels;
 
-namespace WPFGenericHost
+namespace WPFGenericHost.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
