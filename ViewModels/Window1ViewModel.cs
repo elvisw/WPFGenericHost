@@ -1,19 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFGenericHost.Models;
 using WPFGenericHost.Services;
 
 namespace WPFGenericHost.ViewModels
 {
-    public partial class Window1ViewModel : ObservableObject
+    public partial class Window1ViewModel : ObservableObject, IRecipient<StringMessage>
     {
         private readonly ITextService _textService;
 
         [ObservableProperty]
-        private string? helloText;
+        private string? _helloText;
+
+        [ObservableProperty]
+        private string? _message;
+
         /// <summary>
         /// 无参构造函数，为XAML设计器提供设计时支持
         /// </summary>
@@ -30,6 +36,12 @@ namespace WPFGenericHost.ViewModels
         {
             _textService = textService;
             HelloText = _textService.GetText();
+            WeakReferenceMessenger.Default.RegisterAll(this);
+        }
+
+        public void Receive(StringMessage message)
+        {
+            Message = message.Value;
         }
     }
 }
