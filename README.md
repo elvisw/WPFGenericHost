@@ -51,6 +51,8 @@
                     services.AddSingleton<ITextService, TextService>();
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<MainWindow>();
+                    services.AddTransient<Window1ViewModel>();
+                    services.AddTransient<Window1>();
                 })
                 .ConfigureLogging(logging =>
                 {
