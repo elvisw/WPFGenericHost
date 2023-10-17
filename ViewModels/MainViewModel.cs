@@ -26,7 +26,7 @@ namespace WPFGenericHost.ViewModels
         public MainViewModel(ILogger<MainViewModel> logger)
         {
             logger.LogInformation($"{typeof(MainWindow)} has been loaded.");
-            WeakReferenceMessenger.Default.RegisterAll(this);
+            //WeakReferenceMessenger.Default.RegisterAll(this);
         }
 
 

@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +15,13 @@ namespace WPFGenericHost.ViewModels
     public partial class Window1ViewModel : ObservableObject, IRecipient<StringMessage>
     {
         private readonly ITextService _textService;
+        string[] _titles = { "Excellent", "Good", "Super", "REALLY GOOD DOCTOR!", "THANK YOU!", "THE BEST", "EXCELLENT PHYSICIAN", "EXCELLENT DOCTOR" };
+
 
         [ObservableProperty]
         private string? _helloText;
+
+        public ObservableCollection<string> List1 { get; set; } = new ObservableCollection<string>();
 
         [ObservableProperty]
         private string? _message;
@@ -37,6 +43,12 @@ namespace WPFGenericHost.ViewModels
             _textService = textService;
             HelloText = _textService.GetText();
             WeakReferenceMessenger.Default.RegisterAll(this);
+        }
+
+        [RelayCommand]
+        private void AddItem()
+        {
+            List1.Add(_titles[new Random().Next(0, _titles.Length)]);
         }
 
         public void Receive(StringMessage message)
